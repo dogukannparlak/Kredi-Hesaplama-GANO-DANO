@@ -1,0 +1,10 @@
+# Kişisel transkript
+OgrenciTranskript.pdf
+
+# Geçici / bağımlılık
+node_modules/
+.tmp-xlsx/
+
+# OS
+.DS_Store
+Thumbs.db

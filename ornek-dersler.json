@@ -1,0 +1,54 @@
+[
+  {
+    "ders": "Ders A",
+    "not": "D1",
+    "akts": 4,
+    "tekrar": true,
+    "eskiNot": "F1"
+  },
+  {
+    "ders": "Ders B",
+    "not": "F1",
+    "akts": 5,
+    "tekrar": true,
+    "eskiNot": "F1"
+  },
+  {
+    "ders": "Ders C",
+    "not": "F1",
+    "akts": 6,
+    "tekrar": true,
+    "eskiNot": "F1"
+  },
+  {
+    "ders": "Ders D",
+    "not": "F1",
+    "akts": 6,
+    "tekrar": true,
+    "eskiNot": "F1"
+  },
+  {
+    "ders": "Ders E",
+    "not": "D1",
+    "akts": 5,
+    "tekrar": false
+  },
+  {
+    "ders": "Ders F",
+    "not": "C2",
+    "akts": 6,
+    "tekrar": false
+  },
+  {
+    "ders": "Ders G",
+    "not": "C1",
+    "akts": 5,
+    "tekrar": false
+  },
+  {
+    "ders": "Ders H",
+    "not": "B1",
+    "akts": 5,
+    "tekrar": false
+  }
+]

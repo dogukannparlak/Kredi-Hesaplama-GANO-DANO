@@ -13,13 +13,11 @@
         :root {
             --dracula-bg: #282a36;
             --dracula-current-line: #44475a;
-            --dracula-selection: #44475a;
             --dracula-foreground: #f8f8f2;
             --dracula-comment: #6272a4;
             --dracula-cyan: #8be9fd;
             --dracula-green: #50fa7b;
             --dracula-orange: #ffb86c;
-            --dracula-pink: #ff79c6;
             --dracula-purple: #bd93f9;
             --dracula-red: #ff5555;
             --dracula-yellow: #f1fa8c;
@@ -39,7 +37,7 @@
         }
 
         .sonuc-animasyon.goster {
-            max-height: 1000px;
+            max-height: 3000px;
             opacity: 1;
         }
 
@@ -52,133 +50,113 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        .dracula-input {
+        .dracula-input, .dracula-select {
             background-color: var(--dracula-current-line);
             border: 1px solid var(--dracula-comment);
             color: var(--dracula-foreground);
         }
 
-        .dracula-input:focus {
+        .dracula-input:focus, .dracula-select:focus {
             border-color: var(--dracula-purple);
             box-shadow: 0 0 0 2px rgba(189, 147, 249, 0.2);
         }
 
-        .dracula-select {
-            background-color: var(--dracula-current-line);
-            border: 1px solid var(--dracula-comment);
-            color: var(--dracula-foreground);
-        }
-
-        .dracula-select:focus {
-            border-color: var(--dracula-purple);
-            box-shadow: 0 0 0 2px rgba(189, 147, 249, 0.2);
+        .tekrar-alan {
+            transition: opacity 0.2s, max-height 0.2s;
         }
     </style>
 </head>
 <body>
-    <div class="container mx-auto max-w-4xl p-4 sm:p-6 md:p-8">
+    <div class="container mx-auto max-w-5xl p-4 sm:p-6 md:p-8">
         <header class="text-center mb-8">
             <h1 class="text-4xl sm:text-5xl font-bold text-purple-400 mb-2">Not Ortalaması Hesaplayıcı</h1>
-            <p class="text-lg text-gray-400">Derslerinizin harf notu ve kredilerini girerek genel ortalamanızı (GANO) kolayca hesaplayın.</p>
+            <p class="text-lg text-gray-400">Dönem (DANO) ve genel (GANO) ortalamanızı hesaplayın. Tekrar dersler için eski notunuzu işaretleyin.</p>
         </header>
 
         <main class="bg-[#44475a] p-6 sm:p-8 rounded-2xl shadow-lg border border-[#6272a4]">
-            <!-- Önceki Dönem Bilgileri Alanı -->
-            <div class="mb-6 p-4 bg-[#282a36] rounded-lg border border-[#6272a4] grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
-                <div>
-                    <label for="onceki-kredi" class="block text-sm font-semibold text-red-300 mb-1">* Mevcut Toplam Kredi:</label>
-                    <input id="onceki-kredi" type="number" step="0.01" min="0" placeholder="Örn. 45,50" class="w-full p-2 dracula-input rounded-md">
-                    <span class="text-xs text-gray-400">Önceki dönemlerin toplam kredi sayısı</span>
-                </div>
-                <div>
-                    <label for="onceki-ortalama" class="block text-sm font-semibold text-red-300 mb-1">* Mevcut Ortalama:</label>
-                    <input id="onceki-ortalama" type="number" step="0.01" min="0" max="4" placeholder="Örn. 2,85" class="w-full p-2 dracula-input rounded-md">
-                    <span class="text-xs text-gray-400">Önceki dönemlerin genel not ortalaması</span>
-                </div>
-                <div>
-                    <label for="donem-ders-sayisi" class="block text-sm font-semibold text-red-300 mb-1">* Dönem Ders Sayısı:</label>
-                    <select id="donem-ders-sayisi" class="w-full p-2 dracula-select rounded-md">
-                        <option value="">-- Seçiniz --</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                    </select>
+            <!-- Önceki Dönem -->
+            <div class="mb-6 p-4 bg-[#282a36] rounded-lg border border-[#6272a4]">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+                    <div>
+                        <label for="onceki-kredi" class="block text-sm font-semibold text-red-300 mb-1">Mevcut Toplam Kredi</label>
+                        <input id="onceki-kredi" type="number" step="0.01" min="0" placeholder="Örn. 98" class="w-full p-2 dracula-input rounded-md">
+                    </div>
+                    <div>
+                        <label for="onceki-ortalama" class="block text-sm font-semibold text-red-300 mb-1">Mevcut GANO</label>
+                        <input id="onceki-ortalama" type="number" step="0.01" min="0" max="4" placeholder="Örn. 2,23" class="w-full p-2 dracula-input rounded-md">
+                    </div>
+                    <div>
+                        <label for="donem-ders-sayisi" class="block text-sm font-semibold text-red-300 mb-1">Dönem Ders Sayısı</label>
+                        <select id="donem-ders-sayisi" class="w-full p-2 dracula-select rounded-md">
+                            <option value="">-- Seçiniz --</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <!-- Not Sistemi Seçici -->
+            <!-- Not Sistemi -->
             <div class="mb-6 p-4 bg-[#282a36] rounded-lg border border-[#6272a4]">
                 <h3 class="text-lg font-semibold text-purple-400 mb-3">Not Sistemi Seçin</h3>
                 <select id="not-sistemi" class="w-full p-2 dracula-select rounded-md">
                     <option value="sistem1">Sistem 1: AA, BA, BB, CB, CC, DC, DD, FD, FF</option>
                     <option value="sistem2">Sistem 2: AA, AB, BA, BB, BC, CB, CC, CD, DC, DD, FF</option>
                     <option value="sistem3">Sistem 3: A, A-, B+, B, B-, C+, C, C-, D+, D, D-, F</option>
-                    <option value="sistem4">Sistem 4: A1, A2, A3, B1, B2, B3, C1, C2, C3, D, F</option>
+                    <option value="sistem4">Sistem 4: A1, A2, A3, B1, B2, B3, C1, C2, C3, D1, D, F1, F2, F</option>
                 </select>
             </div>
 
-            <!-- Dosya Yükleme Alanı -->
+            <!-- Dosya Yükleme -->
             <div class="mb-6 p-4 bg-[#282a36] rounded-lg border border-[#6272a4]">
-                <h3 class="text-lg font-semibold text-purple-400 mb-3">Dosyadan Veri Yükle</h3>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <input type="file" id="file-input" accept=".xlsx,.xls,.txt" class="hidden">
-                    <button id="file-select-btn" class="btn bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 flex items-center justify-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-                        </svg>
-                        Dosya Seç
+                <h3 class="text-lg font-semibold text-purple-400 mb-3">Dosyadan Ders Yükle</h3>
+                <div class="flex flex-col sm:flex-row flex-wrap gap-3">
+                    <input type="file" id="file-input" accept=".xlsx,.xls,.txt,.json" class="hidden">
+                    <button id="file-select-btn" class="btn bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700">
+                        Dosya Seç (.json / .txt / .xlsx)
                     </button>
                     <span id="selected-file" class="text-gray-400 text-sm self-center"></span>
                 </div>
+                <p class="text-xs text-gray-500 mt-2">Örnek dosyalar: <code>ornek-dersler.json</code>, <code>ornek-dersler.txt</code>, <code>ornek-dersler.xlsx</code></p>
             </div>
 
-            <!-- Ders Listesi Alanı -->
-            <div id="ders-listesi" class="space-y-4 mb-6">
-                <!-- Ders satırları JavaScript ile buraya eklenecek -->
-            </div>
+            <div id="ders-listesi" class="space-y-4 mb-6"></div>
 
-            <!-- Kontrol Butonları -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                <button id="ders-ekle-btn" class="w-full bg-purple-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-purple-700 btn flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" /></svg>
-                    Ders Ekle
-                </button>
-                <button id="hesapla-btn" class="w-full bg-green-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-green-700 btn flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 14h.01M12 17h.01M15 17h.01M9 10h.01M12 10h.01M15 10h.01M3 7h18M3 10h18M3 14h18M3 17h18a2 2 0 00-2-2H5a2 2 0 00-2 2z" /></svg>
-                    Hesapla
-                </button>
-                <button id="sifirla-btn" class="w-full bg-red-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-red-700 btn flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" /></svg>
-                    Sıfırla
-                </button>
+                <button id="ders-ekle-btn" class="w-full bg-purple-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-purple-700 btn">+ Ders Ekle</button>
+                <button id="hesapla-btn" class="w-full bg-green-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-green-700 btn">Hesapla</button>
+                <button id="sifirla-btn" class="w-full bg-red-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-red-700 btn">Sıfırla</button>
             </div>
 
             <!-- Sonuç Alanı -->
             <div id="sonuc-alani" class="sonuc-animasyon">
-                <div class="grid md:grid-cols-3 gap-6 text-center mb-6">
-                    <!-- Ortalama Sonucu -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center mb-6">
                     <div class="bg-[#282a36] p-6 rounded-xl border border-[#6272a4]">
-                        <h3 class="text-sm font-semibold text-purple-400 uppercase tracking-wider mb-2">Ortalamanız (GANO)</h3>
+                        <h3 class="text-sm font-semibold text-cyan-400 uppercase tracking-wider mb-2">Dönem Ortalamanız (DANO)</h3>
+                        <p id="dano-sonuc" class="text-5xl font-bold text-cyan-400"></p>
+                    </div>
+                    <div class="bg-[#282a36] p-6 rounded-xl border border-[#6272a4]">
+                        <h3 class="text-sm font-semibold text-purple-400 uppercase tracking-wider mb-2">Genel Ortalamanız (GANO)</h3>
                         <p id="ortalama-sonuc" class="text-5xl font-bold text-purple-400"></p>
                     </div>
-                    <!-- Yüzdelik Karşılığı -->
                     <div class="bg-[#282a36] p-6 rounded-xl border border-[#6272a4]">
-                        <h3 class="text-sm font-semibold text-green-400 uppercase tracking-wider mb-2">Yüzdelik Karşılığı</h3>
+                        <h3 class="text-sm font-semibold text-green-400 uppercase tracking-wider mb-2">GANO Yüzdelik</h3>
                         <p id="yuzdelik-sonuc" class="text-5xl font-bold text-green-400"></p>
                     </div>
-                    <!-- Durum Değerlendirmesi -->
                     <div id="durum-kutusu" class="p-6 rounded-xl border border-[#6272a4]">
-                        <h3 id="durum-baslik" class="text-sm font-semibold uppercase tracking-wider mb-2">Durumunuz</h3>
+                        <h3 id="durum-baslik" class="text-sm font-semibold uppercase tracking-wider mb-2">Durumunuz (GANO)</h3>
                         <p id="durum-sonuc" class="text-2xl font-bold"></p>
                     </div>
                 </div>
 
-                <!-- Hesaplama Detayları -->
                 <div>
                     <h3 class="text-xl font-semibold mb-3 text-purple-400">Hesaplama Detayları</h3>
                     <div class="bg-[#282a36] p-4 rounded-lg border border-[#6272a4]">
@@ -191,7 +169,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Not sistemleri ve puanları
             const notSistemleri = {
                 sistem1: {
                     harfler: ['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FD', 'FF'],
@@ -217,21 +194,24 @@
                     }
                 },
                 sistem4: {
-                    harfler: ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3', 'D', 'F'],
+                    harfler: ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3', 'D1', 'D', 'F1', 'F2', 'F'],
                     puanlar: {
                         'A1': 4.00, 'A2': 3.75, 'A3': 3.50, 'B1': 3.25,
                         'B2': 3.00, 'B3': 2.75, 'C1': 2.50, 'C2': 2.25,
-                        'C3': 2.00, 'D': 1.75, 'F': 0.00
+                        'C3': 2.00, 'D1': 1.75, 'D': 1.75, 'F1': 0.00, 'F2': 0.00, 'F': 0.00
                     }
                 }
             };
 
-            // Gerekli DOM elemanlarını seç
+            const basarisizNotlar = ['F', 'FF', 'FD', 'F1', 'F2'];
+            const hesaplamaDisiNotlar = ['M', 'G', 'K', 'S', 'Ç'];
+
             const dersListesi = document.getElementById('ders-listesi');
             const dersEkleBtn = document.getElementById('ders-ekle-btn');
             const hesaplaBtn = document.getElementById('hesapla-btn');
             const sifirlaBtn = document.getElementById('sifirla-btn');
             const sonucAlani = document.getElementById('sonuc-alani');
+            const danoSonuc = document.getElementById('dano-sonuc');
             const ortalamaSonuc = document.getElementById('ortalama-sonuc');
             const yuzdelikSonuc = document.getElementById('yuzdelik-sonuc');
             const durumSonuc = document.getElementById('durum-sonuc');
@@ -241,217 +221,270 @@
             const notSistemiSelect = document.getElementById('not-sistemi');
             const oncekiKrediInput = document.getElementById('onceki-kredi');
             const oncekiOrtalamaInput = document.getElementById('onceki-ortalama');
-            // const donemDersSayisiSelect = document.getElementById('donem-ders-sayisi');
-
-            // Not sistemi değiştiğinde harf notlarını güncelle
-            notSistemiSelect.addEventListener('change', () => {
-                const secilenSistem = notSistemiSelect.value;
-                const harfNotuSelects = document.querySelectorAll('.harf-notu');
-                
-                harfNotuSelects.forEach(select => {
-                    const mevcutDeger = select.value;
-                    select.innerHTML = notSistemleri[secilenSistem].harfler
-                        .map(harf => `<option value="${harf}" ${harf === mevcutDeger ? 'selected' : ''}>${harf}</option>`)
-                        .join('');
-                });
-            });
-
-            // Harf notu karşılıkları
-            const harfToPuan = {
-                'A1': 4.00, 'A2': 3.75, 'A3': 3.50,
-                'B1': 3.25, 'B2': 3.00, 'B3': 2.75,
-                'C1': 2.50, 'C2': 2.25, 'C3': 2.00,
-                'D1': 1.75,
-                'F1': 0.00, 'F2': 0.00,
-                
-            };
-            const hesaplamaDisiNotlar = ['M', 'G', 'K', 'S', 'Ç'];
-            const harfNotuSecenekleri = Object.keys(harfToPuan);
-
-            // Dosya yükleme işlemleri için yeni fonksiyonlar
+            const donemDersSayisiSelect = document.getElementById('donem-ders-sayisi');
             const fileInput = document.getElementById('file-input');
             const fileSelectBtn = document.getElementById('file-select-btn');
             const selectedFileSpan = document.getElementById('selected-file');
 
-            fileSelectBtn.addEventListener('click', () => {
-                fileInput.click();
-            });
+            const durumDegerlendir = (ortalama) => {
+                if (ortalama >= 3.50) return { metin: "Çok Başarılı!", kutu: "bg-green-100", baslik: "text-green-800", sonuc: "text-green-600" };
+                if (ortalama >= 3.00) return { metin: "Başarılı!", kutu: "bg-green-100", baslik: "text-green-800", sonuc: "text-green-600" };
+                if (ortalama >= 2.50) return { metin: "Orta Düzey", kutu: "bg-yellow-100", baslik: "text-yellow-800", sonuc: "text-yellow-800" };
+                if (ortalama >= 2.00) return { metin: "Geliştirilmeli", kutu: "bg-orange-100", baslik: "text-orange-800", sonuc: "text-orange-600" };
+                return { metin: "Kritik Durum", kutu: "bg-red-100", baslik: "text-red-800", sonuc: "text-red-600" };
+            };
 
-            fileInput.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
+            const sonuclariTemizle = () => {
+                danoSonuc.textContent = '';
+                ortalamaSonuc.textContent = '';
+                yuzdelikSonuc.textContent = '';
+                durumSonuc.textContent = '';
+                durumKutusu.className = "p-6 rounded-xl border border-[#6272a4]";
+                durumBaslik.className = "text-sm font-semibold uppercase tracking-wider mb-2";
+                durumSonuc.className = "text-2xl font-bold";
+            };
 
-                selectedFileSpan.textContent = file.name;
+            const dersGecerliMi = (not) => not && !hesaplamaDisiNotlar.includes(not);
 
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const data = e.target.result;
-                    if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
-                        const workbook = XLSX.read(data, { type: 'binary' });
-                        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                        const jsonData = XLSX.utils.sheet_to_json(firstSheet);
-                        processImportedData(jsonData);
-                    } else if (file.name.endsWith('.txt')) {
-                        const lines = data.split('\n');
-                        const jsonData = lines.map(line => {
-                            const [dersAdi, harfNotu, kredi] = line.split(',').map(item => item.trim());
-                            return { dersAdi, harfNotu, kredi };
-                        });
-                        processImportedData(jsonData);
-                    }
+            const tekrarDegeri = (val) => {
+                if (typeof val === 'boolean') return val;
+                if (!val) return false;
+                const s = String(val).toLowerCase().trim();
+                return ['evet', 'e', 'true', '1', 'yes', 'x'].includes(s);
+            };
+
+            const satirVerisiOku = (satir) => {
+                const tekrar = satir.querySelector('.tekrar-checkbox')?.checked || false;
+                return {
+                    ad: satir.querySelector('.ders-adi')?.value.trim() || '',
+                    not: satir.querySelector('.harf-notu')?.value || '',
+                    akts: parseFloat(satir.querySelector('.kredi')?.value),
+                    tekrar,
+                    eskiNot: tekrar ? (satir.querySelector('.eski-not')?.value || '') : ''
                 };
-
-                if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
-                    reader.readAsBinaryString(file);
-                } else {
-                    reader.readAsText(file);
-                }
-            });
-
-            const processImportedData = (data) => {
-                dersListesi.innerHTML = '';
-                const secilenSistem = notSistemiSelect.value;
-                const harfNotlari = notSistemleri[secilenSistem].harfler;
-
-                data.forEach(row => {
-                    const satirId = `ders-${Date.now()}-${Math.random()}`;
-                    const satirDiv = document.createElement('div');
-                    satirDiv.className = 'grid grid-cols-1 sm:grid-cols-12 gap-3 items-center';
-                    satirDiv.id = satirId;
-
-                    satirDiv.innerHTML = `
-                        <input type="text" value="${row.dersAdi || ''}" placeholder="Ders Adı (İsteğe Bağlı)" class="ders-adi col-span-1 sm:col-span-5 w-full p-2 dracula-input rounded-md">
-                        <select class="harf-notu col-span-1 sm:col-span-3 w-full p-2 dracula-select rounded-md">
-                            ${harfNotlari.map(not => `<option value="${not}" ${not === row.harfNotu ? 'selected' : ''}>${not}</option>`).join('')}
-                        </select>
-                        <input type="number" value="${row.kredi || ''}" placeholder="Kredi" min="0" step="0.5" class="kredi col-span-1 sm:col-span-2 w-full p-2 dracula-input rounded-md">
-                        <button onclick="document.getElementById('${satirId}').remove()" class="sil-btn col-span-1 sm:col-span-2 w-full bg-red-600 text-white hover:bg-red-700 p-2 rounded-md flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" /></svg>
-                        </button>
-                    `;
-                    dersListesi.appendChild(satirDiv);
-                });
             };
 
-            // Ders satırı ekleme fonksiyonunu güncelle
-            const dersSatiriEkle = () => {
-                const satirId = `ders-${Date.now()}`;
-                const satirDiv = document.createElement('div');
-                satirDiv.className = 'grid grid-cols-1 sm:grid-cols-12 gap-3 items-center';
-                satirDiv.id = satirId;
-
-                const secilenSistem = notSistemiSelect.value;
-                const harfNotlari = notSistemleri[secilenSistem].harfler;
-
-                satirDiv.innerHTML = `
-                    <input type="text" placeholder="Ders Adı (İsteğe Bağlı)" class="ders-adi col-span-1 sm:col-span-5 w-full p-2 dracula-input rounded-md">
-                    <select class="harf-notu col-span-1 sm:col-span-3 w-full p-2 dracula-select rounded-md">
-                        ${harfNotlari.map(not => `<option value="${not}">${not}</option>`).join('')}
-                    </select>
-                    <input type="number" placeholder="Kredi" min="0" step="0.5" class="kredi col-span-1 sm:col-span-2 w-full p-2 dracula-input rounded-md">
-                    <button onclick="document.getElementById('${satirId}').remove()" class="sil-btn col-span-1 sm:col-span-2 w-full bg-red-600 text-white hover:bg-red-700 p-2 rounded-md flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" /></svg>
-                    </button>
-                `;
-                dersListesi.appendChild(satirDiv);
+            const formDersleriniOku = () => {
+                return Array.from(document.querySelectorAll('#ders-listesi > div'))
+                    .map(satirVerisiOku)
+                    .filter(d => !isNaN(d.akts) && d.akts > 0);
             };
 
-            // Ortalama hesaplama fonksiyonunu güncelle
-            const ortalamaHesapla = () => {
+            const harfSecenekleriHtml = (secili = '') => {
+                const harfler = notSistemleri[notSistemiSelect.value].harfler;
+                return harfler.map(h => `<option value="${h}" ${h === secili ? 'selected' : ''}>${h}</option>`).join('');
+            };
+
+            const tekrarAlaniGuncelle = (satir) => {
+                const checkbox = satir.querySelector('.tekrar-checkbox');
+                const alan = satir.querySelector('.tekrar-alan');
+                if (!checkbox || !alan) return;
+                alan.classList.toggle('hidden', !checkbox.checked);
+            };
+
+            const dersHesapla = (dersler, puanlar) => {
+                let detaylar = [];
                 let toplamPuan = 0;
                 let toplamKredi = 0;
-                let detaylarHTML = '';
-                const dersSatirlari = document.querySelectorAll('#ders-listesi > div');
-                const secilenSistem = notSistemiSelect.value;
-                const puanlar = notSistemleri[secilenSistem].puanlar;
 
-                // Önceki dönem bilgileri
-                const oncekiKredi = parseFloat(oncekiKrediInput.value) || 0;
-                const oncekiOrtalama = parseFloat(oncekiOrtalamaInput.value) || 0;
-                let oncekiPuan = oncekiKredi * oncekiOrtalama;
+                dersler.forEach((d, index) => {
+                    const ad = d.ad || d.ders || `Ders ${index + 1}`;
 
-                if (dersSatirlari.length === 0 && oncekiKredi === 0) {
-                    alert("Lütfen hesaplama yapmak için en az bir ders veya önceki dönem bilgisi ekleyin.");
-                    return;
-                }
-
-                dersSatirlari.forEach((satir, index) => {
-                    const harfNotu = satir.querySelector('.harf-notu').value;
-                    const kredi = parseFloat(satir.querySelector('.kredi').value);
-                    const dersAdi = satir.querySelector('.ders-adi').value || `Ders ${index + 1}`;
-
-                    if (isNaN(kredi) || kredi <= 0) {
-                        detaylarHTML += `<li class="text-yellow-600"><span>${dersAdi}</span><span class="ml-2">- Geçersiz kredi değeri, hesaplama dışı bırakıldı.</span></li>`;
+                    if (!dersGecerliMi(d.not)) {
+                        detaylar.push(`<li class="text-gray-500">${ad} (${d.not}, ${d.akts} kredi) — hesaba katılmadı</li>`);
                         return;
                     }
 
-                    const puan = puanlar[harfNotu];
-
-                    if (harfNotu === 'F' || harfNotu === 'FF' || harfNotu === 'FD') {
-                        detaylarHTML += `<li class="text-red-400"><span>${dersAdi} (${harfNotu}, ${kredi} kredi)</span><span class="ml-2">- Başarısız, hesaplamaya katıldı.</span></li>`;
-                    } else {
-                        detaylarHTML += `<li><span class="font-semibold">${dersAdi} (${harfNotu}):</span><span class="ml-2">${puan.toFixed(2)} x ${kredi} kredi =</span><span class="font-semibold ml-2">${(puan * kredi).toFixed(2)}</span></li>`;
+                    const puan = puanlar[d.not];
+                    if (puan === undefined) {
+                        detaylar.push(`<li class="text-yellow-400">${ad} (${d.not}) — tanınmayan not</li>`);
+                        return;
                     }
 
-                    toplamPuan += puan * kredi;
-                    toplamKredi += kredi;
+                    const satirPuan = puan * d.akts;
+                    toplamPuan += satirPuan;
+                    toplamKredi += d.akts;
+
+                    if (basarisizNotlar.includes(d.not)) {
+                        detaylar.push(`<li class="text-red-400">${ad} (${d.not}, ${d.akts} kredi) — başarısız, katıldı</li>`);
+                    } else {
+                        detaylar.push(`<li><span class="font-semibold">${ad} (${d.not}):</span> ${puan.toFixed(2)} x ${d.akts} = <span class="font-semibold">${satirPuan.toFixed(2)}</span></li>`);
+                    }
                 });
 
-                // Yeni genel ortalama hesaplama
-                const genelToplamKredi = toplamKredi + oncekiKredi;
-                const genelToplamPuan = toplamPuan + oncekiPuan;
+                return {
+                    ortalama: toplamKredi > 0 ? toplamPuan / toplamKredi : null,
+                    toplamPuan,
+                    toplamKredi,
+                    detaylar
+                };
+            };
 
-                if (genelToplamKredi === 0) {
-                    ortalamaSonuc.textContent = "N/A";
-                    yuzdelikSonuc.textContent = "N/A";
-                    durumSonuc.textContent = "Geçerli kredi yok";
-                    durumKutusu.className = "p-6 rounded-xl bg-yellow-100";
-                    durumBaslik.className = "text-sm font-semibold uppercase tracking-wider mb-2 text-yellow-800";
-                    durumSonuc.className = "text-2xl font-bold text-yellow-800";
-                } else {
-                    const ortalama = genelToplamPuan / genelToplamKredi;
-                    const yuzdelik = (ortalama / 4.00) * 100;
-                    ortalamaSonuc.textContent = ortalama.toFixed(2);
-                    yuzdelikSonuc.textContent = `${yuzdelik.toFixed(1)}%`;
-                    
-                    // Durum değerlendirmesi
-                    let durumMetni, durumRenkKutusu, durumRenkBaslik, durumRenkSonuc;
-                    if (ortalama >= 3.50) {
-                        durumMetni = "🎉 Çok Başarılı!";
-                        durumRenkKutusu = "bg-green-100";
-                        durumRenkBaslik = "text-green-800";
-                        durumRenkSonuc = "text-green-600";
-                    } else if (ortalama >= 3.00) {
-                        durumMetni = "👍 Başarılı!";
-                        durumRenkKutusu = "bg-green-100";
-                        durumRenkBaslik = "text-green-800";
-                        durumRenkSonuc = "text-green-600";
-                    } else if (ortalama >= 2.50) {
-                        durumMetni = "📚 Orta Düzey";
-                        durumRenkKutusu = "bg-yellow-100";
-                        durumRenkBaslik = "text-yellow-800";
-                        durumRenkSonuc = "text-yellow-800";
-                    } else if (ortalama >= 2.00) {
-                        durumMetni = "⚠️ Geliştirilmeli";
-                        durumRenkKutusu = "bg-orange-100";
-                        durumRenkBaslik = "text-orange-800";
-                        durumRenkSonuc = "text-orange-600";
-                    } else {
-                        durumMetni = "🚨 Kritik Durum";
-                        durumRenkKutusu = "bg-red-100";
-                        durumRenkBaslik = "text-red-800";
-                        durumRenkSonuc = "text-red-600";
-                    }
-                    
-                    durumSonuc.textContent = durumMetni;
-                    durumKutusu.className = `p-6 rounded-xl ${durumRenkKutusu}`;
-                    durumBaslik.className = `text-sm font-semibold uppercase tracking-wider mb-2 ${durumRenkBaslik}`;
-                    durumSonuc.className = `text-2xl font-bold ${durumRenkSonuc}`;
+            const ganoHesapla = (oncekiKredi, oncekiGano, dersler, puanlar) => {
+                let genelPuan = oncekiKredi * oncekiGano;
+                let genelKredi = oncekiKredi;
+                const detaylar = [];
+                const tekrarDetaylari = [];
+
+                if (oncekiKredi > 0) {
+                    detaylar.push(`<li class="text-cyan-400">Önceki dönemler: ${oncekiKredi} kredi x ${oncekiGano.toFixed(2)} = ${genelPuan.toFixed(2)}</li>`);
                 }
 
-                // Önceki dönem detayını ekle
-                if (oncekiKredi > 0) {
-                    detaylarHTML = `<li class='text-cyan-400'><span>Önceki Dönemler:</span> <span class='ml-2'>${oncekiKredi} kredi x ${oncekiOrtalama.toFixed(2)} ortalama = ${(oncekiPuan).toFixed(2)}</span></li>` + detaylarHTML;
+                dersler.forEach((d, index) => {
+                    const ad = d.ad || d.ders || `Ders ${index + 1}`;
+                    if (!dersGecerliMi(d.not)) return;
+
+                    const yeniPuan = puanlar[d.not];
+                    if (yeniPuan === undefined) return;
+
+                    if (d.tekrar) {
+                        if (!d.eskiNot) {
+                            tekrarDetaylari.push(`<li class="text-yellow-400">${ad} — tekrar işaretli ama eski not girilmedi</li>`);
+                            genelPuan += yeniPuan * d.akts;
+                            genelKredi += d.akts;
+                            return;
+                        }
+                        const eskiPuan = puanlar[d.eskiNot];
+                        if (eskiPuan === undefined) {
+                            tekrarDetaylari.push(`<li class="text-yellow-400">${ad} — tanınmayan eski not: ${d.eskiNot}</li>`);
+                            return;
+                        }
+                        const fark = (yeniPuan - eskiPuan) * d.akts;
+                        genelPuan += fark;
+                        tekrarDetaylari.push(`<li class="text-orange-300">${ad}: ${d.eskiNot} → ${d.not} (${fark >= 0 ? '+' : ''}${fark.toFixed(2)} puan, kredi sabit)</li>`);
+                    } else {
+                        genelPuan += yeniPuan * d.akts;
+                        genelKredi += d.akts;
+                    }
+                });
+
+                return {
+                    ortalama: genelKredi > 0 ? genelPuan / genelKredi : null,
+                    genelPuan,
+                    genelKredi,
+                    detaylar,
+                    tekrarDetaylari
+                };
+            };
+
+            const importSatirNormalize = (row) => {
+                const ad = row.ders || row.ad || row.dersAdi || row['Ders Adı'] || row['Ders Adi'] || '';
+                const not = row.not || row.harfNotu || row.Not || row['Harf Notu'] || '';
+                const akts = row.akts || row.kredi || row.Kredi || row['AKTS'] || '';
+                const tekrar = tekrarDegeri(row.tekrar ?? row.tekrarAldim ?? row['Tekrar'] ?? row['Tekrar Aldım']);
+                const eskiNot = row.eskiNot || row.eski_not || row['Eski Not'] || row['EskiNot'] || '';
+                return { ad, not, akts, tekrar: tekrar || !!eskiNot, eskiNot };
+            };
+
+            const dersSatiriEkle = (veri = {}) => {
+                const satirDiv = document.createElement('div');
+                satirDiv.className = 'p-3 bg-[#282a36] rounded-lg border border-[#6272a4] space-y-2';
+
+                const siraNo = veri.sira ?? (dersListesi.children.length + 1);
+                const ad = veri.ad || veri.ders || `Ders ${siraNo}`;
+                const not = veri.not || '';
+                const akts = veri.akts || veri.kredi || '';
+                const tekrar = veri.tekrar || false;
+                const eskiNot = veri.eskiNot || '';
+
+                satirDiv.innerHTML = `
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-2 items-center">
+                        <div class="sm:col-span-4">
+                            <label class="text-xs text-gray-400 sm:hidden">Ders Adı</label>
+                            <input type="text" value="${ad}" placeholder="Ders Adı" class="ders-adi w-full p-2 dracula-input rounded-md">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="text-xs text-gray-400 sm:hidden">Not</label>
+                            <select class="harf-notu w-full p-2 dracula-select rounded-md">${harfSecenekleriHtml(not)}</select>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="text-xs text-gray-400 sm:hidden">Kredi</label>
+                            <input type="number" value="${akts}" placeholder="Kredi" min="0" step="0.5" class="kredi w-full p-2 dracula-input rounded-md">
+                        </div>
+                        <div class="sm:col-span-3 flex items-center gap-2">
+                            <input type="checkbox" class="tekrar-checkbox w-4 h-4 accent-orange-400" ${tekrar ? 'checked' : ''}>
+                            <label class="tekrar-label text-sm text-orange-300 cursor-pointer select-none">Bu dersi tekrar aldım</label>
+                        </div>
+                        <div class="sm:col-span-1">
+                            <button type="button" class="sil-btn w-full bg-red-600 text-white hover:bg-red-700 p-2 rounded-md text-sm">Sil</button>
+                        </div>
+                    </div>
+                    <div class="tekrar-alan grid grid-cols-1 sm:grid-cols-12 gap-2 ${tekrar ? '' : 'hidden'}">
+                        <div class="sm:col-span-4 sm:col-start-5">
+                            <label class="text-xs text-orange-300 block mb-1">Eski Not</label>
+                            <select class="eski-not w-full p-2 dracula-select rounded-md border border-orange-700">${harfSecenekleriHtml(eskiNot)}</select>
+                        </div>
+                    </div>
+                `;
+
+                const checkbox = satirDiv.querySelector('.tekrar-checkbox');
+                const label = satirDiv.querySelector('.tekrar-label');
+                const id = `tekrar-${Date.now()}-${Math.random().toString(36).slice(2, 5)}`;
+                checkbox.id = id;
+                label.setAttribute('for', id);
+
+                satirDiv.querySelector('.sil-btn').addEventListener('click', () => satirDiv.remove());
+                checkbox.addEventListener('change', () => tekrarAlaniGuncelle(satirDiv));
+
+                dersListesi.appendChild(satirDiv);
+            };
+
+            const processImportedData = (data) => {
+                dersListesi.innerHTML = '';
+                data.forEach(row => dersSatiriEkle(importSatirNormalize(row)));
+                if (data.length > 0) donemDersSayisiSelect.value = String(data.length);
+                sonucAlani.classList.remove('goster');
+                sonuclariTemizle();
+            };
+
+            const txtSatirParse = (line) => {
+                const p = line.split(',').map(s => s.trim());
+                if (p.length >= 5) {
+                    return { ad: p[0], not: p[1], akts: p[2], tekrar: p[3], eskiNot: p[4] };
+                }
+                if (p.length === 4 && p[3]) {
+                    return { ad: p[0], not: p[1], akts: p[2], eskiNot: p[3], tekrar: true };
+                }
+                return { ad: p[0], not: p[1], akts: p[2] };
+            };
+
+            const ortalamaHesapla = () => {
+                const puanlar = notSistemleri[notSistemiSelect.value].puanlar;
+                const formDersleri = formDersleriniOku();
+
+                if (formDersleri.length === 0) {
+                    alert('Lütfen en az bir ders ekleyin veya dosyadan yükleyin.');
+                    return;
+                }
+
+                const danoSonucu = dersHesapla(formDersleri, puanlar);
+                const oncekiKredi = parseFloat(oncekiKrediInput.value) || 0;
+                const oncekiGano = parseFloat(oncekiOrtalamaInput.value) || 0;
+                const ganoSonucu = ganoHesapla(oncekiKredi, oncekiGano, formDersleri, puanlar);
+
+                danoSonuc.textContent = danoSonucu.ortalama !== null ? danoSonucu.ortalama.toFixed(2) : 'N/A';
+
+                if (ganoSonucu.ortalama !== null) {
+                    ortalamaSonuc.textContent = ganoSonucu.ortalama.toFixed(2);
+                    yuzdelikSonuc.textContent = `${((ganoSonucu.ortalama / 4) * 100).toFixed(1)}%`;
+                    const durum = durumDegerlendir(ganoSonucu.ortalama);
+                    durumSonuc.textContent = durum.metin;
+                    durumKutusu.className = `p-6 rounded-xl ${durum.kutu} border border-[#6272a4]`;
+                    durumBaslik.className = `text-sm font-semibold uppercase tracking-wider mb-2 ${durum.baslik}`;
+                    durumSonuc.className = `text-2xl font-bold ${durum.sonuc}`;
+                } else {
+                    ortalamaSonuc.textContent = 'N/A';
+                    yuzdelikSonuc.textContent = 'N/A';
+                    durumSonuc.textContent = 'Geçerli veri yok';
+                }
+
+                let detaylarHTML = ganoSonucu.detaylar.join('') + danoSonucu.detaylar.join('');
+                if (ganoSonucu.tekrarDetaylari.length > 0) {
+                    detaylarHTML += `<li class="text-orange-300 pt-2 border-t border-[#6272a4]">Tekrar ders düzeltmeleri:</li>`;
+                    detaylarHTML += ganoSonucu.tekrarDetaylari.join('');
+                }
+                if (danoSonucu.toplamKredi > 0) {
+                    detaylarHTML += `<li class="text-cyan-400 mt-2 pt-2 border-t border-[#6272a4]">Dönem özeti: ${danoSonucu.toplamKredi} AKTS, DANO = ${danoSonuc.textContent}</li>`;
                 }
 
                 detayListesi.innerHTML = detaylarHTML;
@@ -459,22 +492,86 @@
                 sonucAlani.scrollIntoView({ behavior: 'smooth', block: 'end' });
             };
 
-            // Sayfayı sıfırlama fonksiyonu
             const sayfayiSifirla = () => {
                 dersListesi.innerHTML = '';
                 sonucAlani.classList.remove('goster');
-                // Başlangıç için 3 satır ekle
-                dersSatiriEkle();
-                dersSatiriEkle();
-                dersSatiriEkle();
+                sonuclariTemizle();
+                oncekiKrediInput.value = '';
+                oncekiOrtalamaInput.value = '';
+                donemDersSayisiSelect.value = '';
+                fileInput.value = '';
+                selectedFileSpan.textContent = '';
+                dersSatiriEkle({ sira: 1 });
+                dersSatiriEkle({ sira: 2 });
+                dersSatiriEkle({ sira: 3 });
             };
 
-            // Olay dinleyicilerini ata
-            dersEkleBtn.addEventListener('click', dersSatiriEkle);
+            notSistemiSelect.addEventListener('change', () => {
+                const html = harfSecenekleriHtml();
+                document.querySelectorAll('.harf-notu, .eski-not').forEach(select => {
+                    const mevcut = select.value;
+                    select.innerHTML = notSistemleri[notSistemiSelect.value].harfler
+                        .map(h => `<option value="${h}" ${h === mevcut ? 'selected' : ''}>${h}</option>`).join('');
+                });
+            });
+
+            donemDersSayisiSelect.addEventListener('change', () => {
+                const sayi = parseInt(donemDersSayisiSelect.value, 10);
+                if (!sayi) return;
+                dersListesi.innerHTML = '';
+                for (let i = 0; i < sayi; i++) dersSatiriEkle({ sira: i + 1 });
+                sonucAlani.classList.remove('goster');
+                sonuclariTemizle();
+            });
+
+            fileSelectBtn.addEventListener('click', () => fileInput.click());
+
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                selectedFileSpan.textContent = file.name;
+
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const data = ev.target.result;
+                    try {
+                        if (file.name.endsWith('.json')) {
+                            const parsed = JSON.parse(data);
+                            const liste = Array.isArray(parsed) ? parsed : (parsed.dersler || []);
+                            if (!Array.isArray(liste) || liste.length === 0) {
+                                alert('JSON geçersiz: dizi veya { "dersler": [...] } bekleniyor.');
+                                return;
+                            }
+                            processImportedData(liste);
+                        } else if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+                            const wb = XLSX.read(data, { type: 'binary' });
+                            const sheet = wb.Sheets[wb.SheetNames[0]];
+                            processImportedData(XLSX.utils.sheet_to_json(sheet));
+                        } else if (file.name.endsWith('.txt')) {
+                            const lines = data.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+                            const jsonData = lines
+                                .filter((line, i) => {
+                                    if (i !== 0) return true;
+                                    const lower = line.toLowerCase();
+                                    return !(lower.includes('ders') && lower.includes('not'));
+                                })
+                                .map(txtSatirParse)
+                                .filter(r => r.not && r.akts);
+                            processImportedData(jsonData);
+                        }
+                    } catch (err) {
+                        alert('Dosya okunamadı: ' + err.message);
+                    }
+                };
+
+                if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) reader.readAsBinaryString(file);
+                else reader.readAsText(file);
+            });
+
+            dersEkleBtn.addEventListener('click', () => dersSatiriEkle());
             hesaplaBtn.addEventListener('click', ortalamaHesapla);
             sifirlaBtn.addEventListener('click', sayfayiSifirla);
 
-            // Sayfa ilk yüklendiğinde başlangıç durumunu ayarla
             sayfayiSifirla();
         });
     </script>

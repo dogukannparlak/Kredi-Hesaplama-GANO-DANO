@@ -1,0 +1,9 @@
+Ders Adı,Not,Kredi,Tekrar,Eski Not
+Ders A,D1,4,evet,F1
+Ders B,F1,5,evet,F1
+Ders C,F1,6,evet,F1
+Ders D,F1,6,evet,F1
+Ders E,D1,5,hayır,
+Ders F,C2,6,hayır,
+Ders G,C1,5,hayır,
+Ders H,B1,5,hayır,
