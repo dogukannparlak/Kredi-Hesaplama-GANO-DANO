@@ -40,14 +40,68 @@ export const NOT_SISTEMLERI = {
         }
     },
     sistem4: {
-        harfler: ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3', 'D1', 'D', 'F1', 'F2', 'F'],
+        harfler: ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3', 'D1', 'F1', 'F2'],
         puanlar: {
             'A1': 4.00, 'A2': 3.75, 'A3': 3.50, 'B1': 3.25,
             'B2': 3.00, 'B3': 2.75, 'C1': 2.50, 'C2': 2.25,
-            'C3': 2.00, 'D1': 1.75, 'D': 1.75, 'F1': 0.00, 'F2': 0.00, 'F': 0.00
+            'C3': 2.00, 'D1': 1.75, 'F1': 0.00, 'F2': 0.00
         }
     }
 };
 
 export const BASARISIZ_NOTLAR = ['F', 'FF', 'FD', 'F1', 'F2'];
 export const HESAPLAMA_DISI_NOTLAR = ['M', 'G', 'K', 'S', 'Ç'];
+
+/** Not sistemine göre kaldığı/tekrar ders varsayılan başarısız harf notu. */
+export const VARSAYILAN_BASARISIZ_NOT = {
+    sistem1: 'FF',
+    sistem2: 'FF',
+    sistem3: 'F',
+    sistem4: 'F1'
+};
+
+export function varsayilanBasarisizNot(notSistemi) {
+    const tercih = VARSAYILAN_BASARISIZ_NOT[notSistemi];
+    if (tercih && NOT_SISTEMLERI[notSistemi]?.harfler.includes(tercih)) {
+        return tercih;
+    }
+    return NOT_SISTEMLERI[notSistemi]?.harfler.find((h) => BASARISIZ_NOTLAR.includes(h)) ?? 'FF';
+}
+
+/** Ağırlıklı sayısal puana karşılık gelen harf notu alt sınırları (100 üzerinden). */
+export const HARF_NOT_ESIKLERI = {
+    sistem1: [
+        { harf: 'AA', min: 90 }, { harf: 'BA', min: 85 }, { harf: 'BB', min: 80 },
+        { harf: 'CB', min: 75 }, { harf: 'CC', min: 70 }, { harf: 'DC', min: 65 },
+        { harf: 'DD', min: 60 }, { harf: 'FD', min: 50 }, { harf: 'FF', min: 0 }
+    ],
+    sistem2: [
+        { harf: 'AA', min: 90 }, { harf: 'AB', min: 85 }, { harf: 'BA', min: 80 },
+        { harf: 'BB', min: 75 }, { harf: 'BC', min: 70 }, { harf: 'CB', min: 65 },
+        { harf: 'CC', min: 60 }, { harf: 'CD', min: 55 }, { harf: 'DC', min: 50 },
+        { harf: 'DD', min: 45 }, { harf: 'FF', min: 0 }
+    ],
+    sistem3: [
+        { harf: 'A', min: 90 }, { harf: 'A-', min: 85 }, { harf: 'B+', min: 80 },
+        { harf: 'B', min: 75 }, { harf: 'B-', min: 70 }, { harf: 'C+', min: 65 },
+        { harf: 'C', min: 60 }, { harf: 'C-', min: 55 }, { harf: 'D+', min: 50 },
+        { harf: 'D', min: 45 }, { harf: 'D-', min: 40 }, { harf: 'F', min: 0 }
+    ],
+    sistem4: [
+        { harf: 'A1', min: 95 }, { harf: 'A2', min: 90 }, { harf: 'A3', min: 85 },
+        { harf: 'B1', min: 80 }, { harf: 'B2', min: 75 }, { harf: 'B3', min: 70 },
+        { harf: 'C1', min: 65 }, { harf: 'C2', min: 60 }, { harf: 'C3', min: 55 },
+        { harf: 'D1', min: 50 }, { harf: 'F1', min: 0 }, { harf: 'F2', min: 0 }
+    ]
+};
+
+export const GECME_VARSAYILAN = {
+    gecmeNotu: 50,
+    finalMinNot: 50,
+    notSistemi: 'sistem1',
+    hedefHarf: 'DD',
+    kalemler: [
+        { ad: 'Vize 1', agirlik: 40, puan: null },
+            { ad: 'Final', agirlik: 60, puan: null }
+    ]
+};

@@ -60,11 +60,11 @@ Dracula temalı koyu arayüz, mor ve cyan vurgular, mobil uyumlu düzen. Sonuç 
 
 ## Hızlı Başlangıç
 
-### Seçenek 1 — Canlı demo (önerilen)
+### Seçenek 1: Canlı demo (önerilen)
 
 Tarayıcıda aç: **[gano-dano.dogukanparlak.com](https://gano-dano.dogukanparlak.com/)**
 
-### Seçenek 2 — Yerel kullanım
+### Seçenek 2: Yerel kullanım
 
 ```bash
 git clone https://github.com/dogukannparlak/Kredi-Hesaplama-GANO-DANO.git
@@ -85,7 +85,7 @@ Ardından `index.html` dosyasını tarayıcınızda açın.
 
 Üniversitenizin harf notu skalasını **Not Sistemi Seçin** alanından belirleyin.
 
-### 2. Transkript yükleyin (önerilen — GANO için)
+### 2. Transkript yükleyin (önerilen, GANO için)
 
 **Transkript (.json)** butonu ile geçmiş dönemlerinizi içe aktarın. Format için [`transkript-ornek.json`](transkript-ornek.json) dosyasına bakın. Yükleme sonrası:
 
@@ -119,11 +119,11 @@ Sadece bu dönemi hesaplamak istiyorsanız her iki alanı da `0` bırakın.
 
 **Hesapla** butonuna basın. Sonuç alanında şunlar görünür:
 
-- **DANO** — dönem ortalamanız (yalnızca form satırları)
-- **GANO** — genel ortalamanız (hesaplama modu alt satırda gösterilir)
-- **GANO Yüzdelik** — yüzde karşılık
-- **Durum** — akademik durum etiketi
-- **Detay listesi** — ders bazlı hesaplama özeti; tekrar edilen kodlar vurgulanır
+- **DANO**: dönem ortalamanız (yalnızca form satırları)
+- **GANO**: genel ortalamanız (hesaplama modu alt satırda gösterilir)
+- **GANO Yüzdelik**: yüzde karşılık
+- **Durum**: akademik durum etiketi
+- **Detay listesi**: ders bazlı hesaplama özeti; tekrar edilen kodlar vurgulanır
 
 ---
 
@@ -152,7 +152,7 @@ Dönem bazlı geçmiş kayıtları içe aktarır. Örnek yapı:
 
 ### Metin dosyası (`.txt`)
 
-**Yeni format** (kod sütunu ile — GANO için önerilir):
+**Yeni format** (kod sütunu ile, GANO için önerilir):
 
 ```
 Kod,Ders Adı,Not,Kredi
@@ -189,16 +189,16 @@ Dönem puanı = Σ (harf_puanı × kredi)   // yalnızca form satırları
 DANO        = dönem_puanı / dönem_kredisi
 ```
 
-### GANO — iki mod
+### GANO: iki mod
 
-**1. Transkript + form (son deneme)** — transkript JSON yüklüyken:
+**1. Transkript + form (son deneme)**: transkript JSON yüklüyken:
 
 ```
 Her ders kodu için en son kayıt alınır (form satırları geçmişi geçersiz kılar)
 GANO = Σ (son_deneme_puanı × akts) / Σ akts
 ```
 
-**2. Manuel yedek mod** — transkript yokken:
+**2. Manuel yedek mod**: transkript yokken:
 
 ```
 GANO = (dönem_puanı + önceki_kredi × önceki_gano) / (dönem_kredisi + önceki_kredi)
@@ -208,7 +208,7 @@ GANO = (dönem_puanı + önceki_kredi × önceki_gano) / (dönem_kredisi + önce
 Yüzdelik = (GANO / 4.00) × 100
 ```
 
-Başarısız notlar (`F`, `FF`, `FD`, `F1`, `F2`) ortalamaya **0 puan** ile dahil edilir — kredi yine sayılır.
+Başarısız notlar (`F`, `FF`, `FD`, `F1`, `F2`) ortalamaya **0 puan** ile dahil edilir; kredi yine sayılır.
 
 > **Doğruluk notu:** Son-deneme GANO, resmi OBS değerine genelde ±0,03 içinde kalır. Kalan fark, üniversitenin tamamlanan AKTS ve tekrar ders kurallarından kaynaklanabilir.
 
@@ -244,7 +244,7 @@ flowchart TB
 
 ## Not Sistemleri
 
-### Sistem 1 — AA … FF
+### Sistem 1: AA … FF
 
 | Harf | Puan | Harf | Puan | Harf | Puan |
 |------|------|------|------|------|------|
@@ -253,7 +253,7 @@ flowchart TB
 | | | CC | 2.00 | FF | 0.00 |
 | | | DC | 1.50 | | |
 
-### Sistem 2 — AA, AB, BA … FF
+### Sistem 2: AA, AB, BA … FF
 
 | Harf | Puan | Harf | Puan | Harf | Puan |
 |------|------|------|------|------|------|
@@ -263,7 +263,7 @@ flowchart TB
 | | | | | DD | 1.75 |
 | | | | | FF | 0.00 |
 
-### Sistem 3 — A, A-, B+ … F
+### Sistem 3: A, A-, B+ … F
 
 | Harf | Puan | Harf | Puan | Harf | Puan |
 |------|------|------|------|------|------|
@@ -274,7 +274,7 @@ flowchart TB
 | | | | | D- | 0.70 |
 | | | | | F | 0.00 |
 
-### Sistem 4 — A1, A2, A3 … F
+### Sistem 4: A1, A2, A3 … F
 
 | Harf | Puan | Harf | Puan | Harf | Puan |
 |------|------|------|------|------|------|
@@ -361,7 +361,7 @@ Kredi-Hesaplama-GANO-DANO/
 | Stil | Tailwind CSS (CDN) |
 | Font | Inter (Google Fonts) |
 | Excel okuma | SheetJS / xlsx 0.18.5 (CDN) |
-| Build | Yok — statik dosya |
+| Build | Yok, statik dosya |
 
 ### CDN bağımlılıkları
 

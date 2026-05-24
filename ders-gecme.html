@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ders Geçme Hesaplayıcı | Doğukan Parlak</title>
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', saved || (dark ? 'dark' : 'light'));
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/theme.css">
+</head>
+<body>
+    <nav aria-label="Ana navigasyon">
+        <div>
+            <a href="./" class="nav-brand">Doğukan Parlak</a>
+            <div>
+                <a href="./">GANO-DANO</a>
+                <a href="ders-gecme.html" class="active">Ders Geçme</a>
+                <a href="https://dogukanparlak.com/about" target="_blank" rel="noopener noreferrer">Hakkımda</a>
+                <a href="https://dogukanparlak.com/projects" target="_blank" rel="noopener noreferrer">Projeler</a>
+                <a href="https://dogukanparlak.com/contact" target="_blank" rel="noopener noreferrer">İletişim</a>
+                <a href="https://dogukanparlak.com" target="_blank" rel="noopener noreferrer">Blog</a>
+                <div class="navbar-social">
+                    <a href="https://www.instagram.com/dogukanparlak_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://github.com/dogukannparlak" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://x.com/dogukanpariak" target="_blank" rel="noopener noreferrer" aria-label="X/Twitter">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <button type="button" class="theme-toggle" aria-label="Tema değiştir">
+                        <svg class="sun-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
+                        <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/></svg>
+                    </button>
+                </div>
+            </div>
+            <button type="button" class="mobile-menu-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="Menüyü aç/kapat">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-content">
+            <a href="./">GANO-DANO</a>
+            <a href="ders-gecme.html" class="active">Ders Geçme</a>
+            <a href="https://dogukanparlak.com/about" target="_blank" rel="noopener noreferrer">Hakkımda</a>
+            <a href="https://dogukanparlak.com/projects" target="_blank" rel="noopener noreferrer">Projeler</a>
+            <a href="https://dogukanparlak.com/contact" target="_blank" rel="noopener noreferrer">İletişim</a>
+            <a href="https://dogukanparlak.com" target="_blank" rel="noopener noreferrer">Blog</a>
+            <div class="mobile-menu-social">
+                <a href="https://www.instagram.com/dogukanparlak_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="https://github.com/dogukannparlak" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="https://x.com/dogukanpariak" target="_blank" rel="noopener noreferrer" aria-label="X/Twitter">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+            <div class="mobile-menu-theme-toggle">
+                <button type="button" class="theme-toggle" aria-label="Tema değiştir">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-wrap">
+        <div class="container">
+            <header class="hero hero--compact">
+                <div class="hero-blob hero-blob-1" aria-hidden="true"></div>
+                <div class="hero-blob hero-blob-2" aria-hidden="true"></div>
+                <div class="hero-content">
+                    <h1>Ders Geçme Hesaplayıcı</h1>
+                    <p class="subtitle">Ağırlıklı notlarınızla finalden almanız gereken minimum puanı hesaplayın. Türkiye'deki yaygın %100 ağırlık sistemine göre çalışır.</p>
+                </div>
+            </header>
+
+            <main class="glass-panel" style="padding: var(--space-xl);">
+                <div class="glass-section">
+                    <h3 class="section-title">Not Sistemi</h3>
+                    <select id="not-sistemi" class="glass-select">
+                        <option value="sistem1">Sistem 1: AA, BA, BB, CB, CC, DC, DD, FD, FF</option>
+                        <option value="sistem2">Sistem 2: AA, AB, BA, BB, BC, CB, CC, CD, DC, DD, FF</option>
+                        <option value="sistem3">Sistem 3: A, A-, B+, B, B-, C+, C, C-, D+, D, D-, F</option>
+                        <option value="sistem4">Sistem 4: A1, A2, A3, B1, B2, B3, C1, C2, C3, D1, F1, F2</option>
+                    </select>
+                </div>
+
+                <div class="glass-section">
+                    <div class="grid-3">
+                        <div>
+                            <label for="gecme-notu" class="field-label">Geçme Notu (hedef)</label>
+                            <input id="gecme-notu" type="number" step="0.01" min="0" max="100" placeholder="Örn. 60" class="glass-input">
+                        </div>
+                        <div>
+                            <label class="field-label">Bu harfle geçebilir miyim?</label>
+                            <div class="final-min-row">
+                                <label>
+                                    <input type="checkbox" id="hedef-harf-check">
+                                    En az
+                                </label>
+                                <select id="hedef-harf" class="glass-select" disabled></select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="field-label">Final minimum şartı</label>
+                            <div class="final-min-row">
+                                <label>
+                                    <input type="checkbox" id="final-min-check">
+                                    Finalden en az
+                                </label>
+                                <input id="final-min-not" type="number" step="0.01" min="0" max="100" value="50" class="glass-input" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: var(--space-md);">
+                        <label class="field-label">Ağırlık kontrolü</label>
+                        <p id="agirlik-toplam" class="agirlik-toplam agirlik-toplam--warn">Toplam ağırlık: %0</p>
+                        <p id="gecme-hata" class="gecme-hata" hidden role="alert"></p>
+                    </div>
+                </div>
+
+                <div class="glass-section">
+                    <h3 class="section-title">Değerlendirme Kalemleri</h3>
+                    <p style="text-align: center; color: var(--text-tertiary); font-size: 0.875rem; margin-bottom: var(--space-md);">
+                        Henüz yapılmamış sınavların notunu boş bırakın. Birden fazla boş kalem varsa hedef olanı seçin.
+                    </p>
+                    <div class="gecme-row-headers" aria-hidden="true">
+                        <span>Değerlendirme</span>
+                        <span>Yüzde (%)</span>
+                        <span>Not</span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div id="kalem-listesi"></div>
+                </div>
+
+                <div class="grid-actions" style="margin-bottom: var(--space-xl);">
+                    <button type="button" id="kalem-ekle-btn" class="btn">+ Kalem Ekle</button>
+                    <button type="button" id="hesapla-btn" class="btn btn-accent">Hesapla</button>
+                    <button type="button" id="sifirla-btn" class="btn btn-sm-danger">Sıfırla</button>
+                </div>
+
+                <div id="sonuc-alani" class="sonuc-animasyon">
+                    <div id="hedef-harf-alani" class="hedef-harf-alani" hidden>
+                        <p id="hedef-harf-mesaj"></p>
+                    </div>
+                    <div class="grid-results" style="margin-bottom: var(--space-xl);">
+                        <div class="result-card">
+                            <h3 class="result-label">Geçme Hedefi</h3>
+                            <p id="hedef-not-sonuc" class="result-value"></p>
+                        </div>
+                        <div class="result-card">
+                            <h3 id="gerekli-final-baslik" class="result-label">Gerekli Min. Not</h3>
+                            <p id="gerekli-final-sonuc" class="result-value"></p>
+                            <p id="agirlikli-ortalama-sonuc" class="result-subvalue" hidden></p>
+                        </div>
+                        <div class="result-card">
+                            <h3 class="result-label">Harf Notu</h3>
+                            <p id="harf-not-sonuc" class="result-value"></p>
+                            <p id="harf-durum-sonuc" class="harf-durum-metin"></p>
+                        </div>
+                        <div id="durum-kutusu" class="result-card">
+                            <h3 class="durum-baslik">Durum</h3>
+                            <p id="durum-sonuc" class="durum-metin"></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="section-title">Hesaplama Açıklaması</h3>
+                        <div class="glass-section" style="margin-bottom: 0;">
+                            <p id="detay-aciklama" class="gecme-aciklama"></p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Doğukan Parlak</h3>
+                    <p>Bilgisayar Mühendisi · GANO/DANO & Ders Geçme</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://dogukanparlak.com/about" target="_blank" rel="noopener noreferrer">Hakkımda</a>
+                    <a href="https://dogukanparlak.com/projects" target="_blank" rel="noopener noreferrer">Projeler</a>
+                    <a href="https://dogukanparlak.com/contact" target="_blank" rel="noopener noreferrer">İletişim</a>
+                    <a href="https://github.com/dogukannparlak/Kredi-Hesaplama-GANO-DANO" target="_blank" rel="noopener noreferrer">Kaynak Kod</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/dogukanparlak_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://github.com/dogukannparlak" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://x.com/dogukanpariak" target="_blank" rel="noopener noreferrer" aria-label="X/Twitter">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <div class="footer-bottom-content">
+                    <p>© 2026 Doğukan Parlak · Veriler tarayıcıda kalır</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="assets/js/gecme-main.js"></script>
+</body>
+</html>

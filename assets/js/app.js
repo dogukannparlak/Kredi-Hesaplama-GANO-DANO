@@ -1,4 +1,4 @@
-import { NOT_SISTEMLERI } from './config.js';
+import { NOT_SISTEMLERI, varsayilanBasarisizNot } from './config.js';
 import {
     dersHesapla,
     ganoHesapla,
@@ -76,7 +76,7 @@ export function initApp() {
         const not = veri.not || '';
         const akts = veri.akts || veri.kredi || '';
         const tekrar = veri.tekrar || false;
-        const eskiNot = veri.eskiNot || '';
+        const eskiNot = veri.eskiNot || (tekrar ? varsayilanBasarisizNot(notSistemiSelect.value) : '');
 
         satirDiv.innerHTML = `
             <div class="grid-12">
@@ -115,14 +115,29 @@ export function initApp() {
         label.setAttribute('for', id);
 
         satirDiv.querySelector('.sil-btn').addEventListener('click', () => satirDiv.remove());
-        checkbox.addEventListener('change', () => tekrarAlaniGuncelle(satirDiv));
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                const eskiSelect = satirDiv.querySelector('.eski-not');
+                if (eskiSelect) {
+                    eskiSelect.value = varsayilanBasarisizNot(notSistemiSelect.value);
+                }
+            }
+            tekrarAlaniGuncelle(satirDiv);
+        });
 
         dersListesi.appendChild(satirDiv);
     };
 
     const processImportedData = (data) => {
         dersListesi.innerHTML = '';
-        data.forEach(row => dersSatiriEkle(importSatirNormalize(row)));
+        const basarisiz = varsayilanBasarisizNot(notSistemiSelect.value);
+        data.forEach((row) => {
+            const normalized = importSatirNormalize(row);
+            if (normalized.tekrar && !normalized.eskiNot) {
+                normalized.eskiNot = basarisiz;
+            }
+            dersSatiriEkle(normalized);
+        });
         if (data.length > 0) donemDersSayisiSelect.value = String(data.length);
         sonucAlani.classList.remove('goster');
         sonuclariTemizle();
@@ -187,10 +202,21 @@ export function initApp() {
     };
 
     notSistemiSelect.addEventListener('change', () => {
-        document.querySelectorAll('.harf-notu, .eski-not').forEach(select => {
-            const mevcut = select.value;
-            select.innerHTML = NOT_SISTEMLERI[notSistemiSelect.value].harfler
-                .map(h => `<option value="${h}" ${h === mevcut ? 'selected' : ''}>${h}</option>`).join('');
+        const sistem = notSistemiSelect.value;
+        const yeniBasarisiz = varsayilanBasarisizNot(sistem);
+        document.querySelectorAll('#ders-listesi > div').forEach((satir) => {
+            satir.querySelectorAll('.harf-notu, .eski-not').forEach((select) => {
+                const mevcut = select.value;
+                select.innerHTML = NOT_SISTEMLERI[sistem].harfler
+                    .map(h => `<option value="${h}" ${h === mevcut ? 'selected' : ''}>${h}</option>`).join('');
+                if (!NOT_SISTEMLERI[sistem].harfler.includes(mevcut)) {
+                    if (select.classList.contains('eski-not') && satir.querySelector('.tekrar-checkbox')?.checked) {
+                        select.value = yeniBasarisiz;
+                    } else {
+                        select.selectedIndex = 0;
+                    }
+                }
+            });
         });
     });
 

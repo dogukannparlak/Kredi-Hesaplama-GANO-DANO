@@ -26,13 +26,13 @@ export const dersHesapla = (dersler, puanlar) => {
         const ad = d.ad || d.ders || `Ders ${index + 1}`;
 
         if (!dersGecerliMi(d.not)) {
-            detaylar.push(`<li style="color: var(--text-muted)">${ad} (${d.not}, ${d.akts} kredi) — hesaba katılmadı</li>`);
+            detaylar.push(`<li style="color: var(--text-muted)">${ad} (${d.not}, ${d.akts} kredi):  hesaba katılmadı</li>`);
             return;
         }
 
         const puan = puanlar[d.not];
         if (puan === undefined) {
-            detaylar.push(`<li class="text-yellow-400">${ad} (${d.not}) — tanınmayan not</li>`);
+            detaylar.push(`<li class="text-yellow-400">${ad} (${d.not}):  tanınmayan not</li>`);
             return;
         }
 
@@ -41,7 +41,7 @@ export const dersHesapla = (dersler, puanlar) => {
         toplamKredi += d.akts;
 
         if (BASARISIZ_NOTLAR.includes(d.not)) {
-            detaylar.push(`<li style="color: var(--danger)">${ad} (${d.not}, ${d.akts} kredi) — başarısız, katıldı</li>`);
+            detaylar.push(`<li style="color: var(--danger)">${ad} (${d.not}, ${d.akts} kredi):  başarısız, katıldı</li>`);
         } else {
             detaylar.push(`<li><span class="font-semibold text-white">${ad} (${d.not}):</span> ${puan.toFixed(2)} x ${d.akts} = <span class="font-semibold text-white">${satirPuan.toFixed(2)}</span></li>`);
         }
@@ -74,14 +74,14 @@ export const ganoHesapla = (oncekiKredi, oncekiGano, dersler, puanlar) => {
 
         if (d.tekrar) {
             if (!d.eskiNot) {
-                tekrarDetaylari.push(`<li class="text-yellow-400">${ad} — tekrar işaretli ama eski not girilmedi</li>`);
+                tekrarDetaylari.push(`<li class="text-yellow-400">${ad}:  tekrar işaretli ama eski not girilmedi</li>`);
                 genelPuan += yeniPuan * d.akts;
                 genelKredi += d.akts;
                 return;
             }
             const eskiPuan = puanlar[d.eskiNot];
             if (eskiPuan === undefined) {
-                tekrarDetaylari.push(`<li class="text-yellow-400">${ad} — tanınmayan eski not: ${d.eskiNot}</li>`);
+                tekrarDetaylari.push(`<li class="text-yellow-400">${ad}:  tanınmayan eski not: ${d.eskiNot}</li>`);
                 return;
             }
             const fark = (yeniPuan - eskiPuan) * d.akts;

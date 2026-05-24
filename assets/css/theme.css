@@ -1,5 +1,5 @@
 /* =================================================================
-   GANO-DANO — dogukanparlak.com design language
+   GANO-DANO | dogukanparlak.com design language
    Dark-first glassmorphism on pure black
    ================================================================= */
 
@@ -999,4 +999,269 @@ footer {
     color: var(--status-danger);
     font-size: 0.875rem;
     padding: var(--space-md);
+}
+
+/* ===== DERS GEÇME ===== */
+.agirlik-toplam {
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-semibold);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.agirlik-toplam--ok {
+    color: var(--status-success);
+    background: rgba(52, 211, 153, 0.1);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.agirlik-toplam--warn {
+    color: var(--status-warning);
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+}
+
+.gecme-hata {
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--status-danger);
+    background: rgba(248, 113, 113, 0.1);
+    border: 1px solid rgba(248, 113, 113, 0.25);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-md);
+    margin-top: var(--space-sm);
+    text-align: center;
+}
+
+.gecme-row-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    align-items: end;
+}
+
+.input-with-suffix {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-suffix .glass-input {
+    padding-right: 2rem;
+}
+
+.input-with-suffix .input-suffix {
+    position: absolute;
+    right: 0.75rem;
+    color: var(--text-tertiary);
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-semibold);
+    pointer-events: none;
+    user-select: none;
+}
+
+.gecme-row-headers {
+    display: none;
+}
+
+@media (min-width: 640px) {
+    .gecme-row-headers {
+        display: grid;
+        grid-template-columns: minmax(7rem, 2fr) minmax(4rem, 1fr) minmax(4rem, 1fr) minmax(9rem, 1.4fr) auto minmax(3.5rem, auto);
+        gap: var(--space-sm);
+        padding: 0 var(--space-xs) var(--space-xs);
+        font-size: 0.75rem;
+        font-weight: var(--font-weight-semibold);
+        color: var(--text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    .gecme-row-headers span:nth-child(n+4) {
+        visibility: hidden;
+    }
+}
+
+@media (min-width: 640px) {
+    .gecme-row-grid {
+        grid-template-columns: minmax(7rem, 2fr) minmax(4rem, 1fr) minmax(4rem, 1fr) minmax(9rem, 1.4fr) auto minmax(3.5rem, auto);
+        align-items: center;
+        gap: var(--space-sm);
+    }
+}
+
+.kalem-durum-cell {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 2.75rem;
+}
+
+.kalem-durum-cell:empty {
+    display: none;
+}
+
+@media (min-width: 640px) {
+    .kalem-durum-cell:empty {
+        display: flex;
+    }
+}
+
+.hedef-cell {
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-bottom: 0;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.kalem-sil-cell {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+.hedef-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.hedef-label input {
+    accent-color: var(--accent-tekrar);
+}
+
+.final-min-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.final-min-row label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.final-min-row input[type="number"] {
+    width: 5rem;
+}
+
+.gecme-aciklama {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.harf-durum-metin {
+    margin: var(--space-sm) 0 0;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+}
+
+.harf-durum-metin--ok {
+    color: rgb(52, 211, 153);
+}
+
+.harf-durum-metin--warn {
+    color: rgb(248, 113, 113);
+}
+
+#harf-not-sonuc {
+    font-size: 3rem;
+    color: var(--accent-tekrar);
+}
+
+.result-subvalue {
+    margin: var(--space-sm) 0 0;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.hedef-harf-alani {
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.hedef-harf-alani p {
+    margin: 0;
+}
+
+.hedef-harf-alani--ok {
+    color: rgb(52, 211, 153);
+    background: rgba(52, 211, 153, 0.1);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.hedef-harf-alani--warn {
+    color: rgb(251, 191, 36);
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+}
+
+.final-min-row .glass-select {
+    min-width: 5.5rem;
+    flex: 1;
+}
+
+.result-card.durum-success { border-color: rgba(52, 211, 153, 0.35); }
+.result-card.durum-warning { border-color: rgba(251, 191, 36, 0.35); }
+.result-card.durum-danger { border-color: rgba(248, 113, 113, 0.35); }
+
+#gerekli-final-sonuc {
+    font-size: 3rem;
+    color: var(--accent-tekrar);
+}
+
+.kalem-durum {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 0.35rem 0.65rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1.35;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+@media (min-width: 900px) {
+    .kalem-durum {
+        font-size: 0.75rem;
+    }
+}
+
+.kalem-durum--ok {
+    color: rgb(52, 211, 153);
+    background: rgba(52, 211, 153, 0.1);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.kalem-durum--warn {
+    color: rgb(248, 113, 113);
+    background: rgba(248, 113, 113, 0.1);
+    border: 1px solid rgba(248, 113, 113, 0.25);
 }
