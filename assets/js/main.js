@@ -2,6 +2,10 @@ import { initLayout } from './layout.js';
 import { initApp } from './app.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    initLayout();
+    try {
+        initLayout();
+    } catch {
+        // Tema/menü hatası hesaplayıcıyı durdurmasın (Brave localStorage engeli vb.)
+    }
     initApp();
 });

@@ -3,17 +3,33 @@ export function initLayout() {
     initMobileMenu();
 }
 
+function getStoredTheme() {
+    try {
+        return localStorage.getItem('theme');
+    } catch {
+        return null;
+    }
+}
+
+function setStoredTheme(theme) {
+    try {
+        localStorage.setItem('theme', theme);
+    } catch {
+        // Brave gibi localStorage'ı engelleyen tarayıcılarda tema yine çalışır
+    }
+}
+
 function initThemeToggle() {
     const themeToggles = document.querySelectorAll('.theme-toggle');
     if (themeToggles.length === 0) return;
 
-    const saved = localStorage.getItem('theme');
+    const saved = getStoredTheme();
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const currentTheme = saved || (systemPrefersDark ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', currentTheme);
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
+        if (!getStoredTheme()) {
             document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
         }
     });
@@ -24,7 +40,7 @@ function initThemeToggle() {
             const theme = document.documentElement.getAttribute('data-theme') || 'dark';
             const next = theme === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
+            setStoredTheme(next);
         });
     });
 }
