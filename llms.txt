@@ -1,0 +1,16 @@
+# GANO-DANO Hesaplayıcı
+
+> Türkiye'deki üniversite öğrencileri için tarayıcıda çalışan, ücretsiz not ortalaması araçları: dönem (DANO) ve genel (GANO) ağırlıklı ortalama hesaplayıcı ile ders geçme (finalden gereken minimum not) hesaplayıcı.
+
+Yapan: Doğukan Parlak (https://dogukanparlak.com). Kaynak kod: https://github.com/dogukannparlak/Kredi-Hesaplama-GANO-DANO
+
+## Sayfalar
+
+- [GANO-DANO Hesaplayıcı](https://gano-dano.dogukanparlak.com/): Mevcut toplam kredi ve GANO ile bu dönemin derslerini (kredi + harf notu) girin; DANO, GANO, 4.00 üzerinden yüzdelik karşılık ve durum etiketi hesaplanır. Dersler JSON, TXT ya da Excel (.xlsx/.xls) dosyasından yüklenebilir; örnek dosyalar sayfadadır. Tekrar derslerde eski not işaretlenebilir.
+- [Ders Geçme Hesaplayıcı](https://gano-dano.dogukanparlak.com/ders-gecme.html): Vize, ödev gibi kalemlerin yüzde ağırlığını ve notlarını girin (boş bırakılan kalem hedeftir); geçme notu için finalden gereken minimum not ve harf notu durumu hesaplanır. Yüzde ağırlıkların toplamı %100 olmalıdır.
+
+## Sınırlar
+
+- 4 harf notu sistemi desteklenir (Sistem 1-4: AA/BA/BB..., AA/AB/BA..., A/A-/B+..., A1/A2/A3...); üniversiteniz farklı bir ölçek kullanıyorsa sonuçlar farklı olabilir.
+- Resmi bir üniversite aracı değildir; resmi transkript ve kayıt işlemleri için kurumunuzun sistemleri esas alınır.
+- Hesaplamalar tarayıcıda yapılır, girilen veriler sunucuya gönderilmez. Sayfalar JavaScript gerektirir. Arayüz Türkçedir.
